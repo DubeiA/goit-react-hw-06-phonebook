@@ -1,23 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// const contact = [];
+
 export const userContact = createSlice({
   name: 'user',
-  initialState: {
-    contact: {
-      name: '',
-      number: '',
-    },
-  },
+  initialState: [],
+
   reducers: {
-    AddName(state, action) {
-      state.contact.name = action.payload;
-    },
-    AddNumber(state, action) {
-      state.contact.number = action.payload;
+    AddContact: {
+      reducer(state, action) {
+        state.push(action.payload);
+      },
+      prepare(contact) {
+        return {
+          payload: contact,
+        };
+      },
     },
   },
 });
 
-export const { AddName, AddNumber } = userContact.actions;
+export const { AddContact } = userContact.actions;
 
 // export default counterSlice.reducer;
