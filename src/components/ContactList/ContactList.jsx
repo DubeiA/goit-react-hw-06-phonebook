@@ -1,19 +1,26 @@
 import css from '../ContactList/ContactList.module.css';
 import { useSelector } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
+import { DeleteContact } from 'redux/reducer';
+import { useDispatch } from 'react-redux';
+
 // import PropTypes from 'prop-types';
 
 export const ContactList = () => {
   const selectors = useSelector(state => state.user);
-  //   const sel = selectors.map(s => s);
-  console.log(selectors);
+  const dispatch = useDispatch();
+
   return (
     <ul className={css.list}>
       {selectors.map(selector => {
         return (
-          <li className={css.item} key={nanoid()}>
+          <li className={css.item} key={selector.id}>
             {selector.name} : {selector.number}
-            <button className={css.item__button}>Видалити</button>
+            <button
+              className={css.item__button}
+              onClick={() => dispatch(DeleteContact(selector.id))}
+            >
+              Видалити
+            </button>
           </li>
         );
       })}

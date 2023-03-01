@@ -1,18 +1,19 @@
 import { useDispatch } from 'react-redux';
 import { AddContact } from 'redux/reducer';
 import css from '../ContactForm/ContactForm.module.css';
+import { nanoid } from '@reduxjs/toolkit';
 
 export function ContactForm() {
   const dispatch = useDispatch();
-  // const selectorsName = useSelector(state => state.user.contact.name);
-  // const selectorsNumber = useSelector(state => state.user.contact.number);
 
   const handleSubmit = e => {
     e.preventDefault();
 
     const { name, number } = e.target;
-    console.log(name.value);
-    dispatch(AddContact({ name: name.value, number: number.value }));
+    // console.log(name.value);
+    dispatch(
+      AddContact({ name: name.value, number: number.value, id: nanoid() })
+    );
 
     e.target.reset();
   };

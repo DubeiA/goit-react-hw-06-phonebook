@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// const contact = [];
-
 export const userContact = createSlice({
   name: 'user',
   initialState: [],
@@ -17,9 +15,11 @@ export const userContact = createSlice({
         };
       },
     },
+    DeleteContact(state, action) {
+      const index = state.findIndex(userId => userId.id === action.payload);
+      state.splice(index, 1);
+    },
   },
 });
 
-export const { AddContact } = userContact.actions;
-
-// export default counterSlice.reducer;
+export const { AddContact, DeleteContact } = userContact.actions;
