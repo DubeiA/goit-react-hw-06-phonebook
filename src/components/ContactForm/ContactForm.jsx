@@ -1,21 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { AddContact } from 'redux/contactSlice';
+import { getContacts } from 'redux/selectors';
 import css from '../ContactForm/ContactForm.module.css';
 import { nanoid } from '@reduxjs/toolkit';
 
 export function ContactForm() {
   const dispatch = useDispatch();
-  const selectors = useSelector(state => state.user.contact);
-  const alertName = () => {
-    return selectors.map(contact => contact.name);
-  };
+  const userName = useSelector(getContacts).map(contact => contact.name);
 
   const handleSubmit = e => {
     e.preventDefault();
 
     const { name, number } = e.target;
 
-    if (alertName().includes(name.value)) {
+    if (userName.includes(name.value)) {
       alert(`${name.value} is already in your contact`);
       return;
     }

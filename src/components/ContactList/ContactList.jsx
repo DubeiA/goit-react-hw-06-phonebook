@@ -9,9 +9,6 @@ import { getContacts, getFilter } from '../../redux/selectors';
 export const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
-
-  console.log(contacts);
-
   const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter)
   );
@@ -20,13 +17,13 @@ export const ContactList = () => {
 
   return (
     <ul className={css.list}>
-      {visibleContacts.map(selector => {
+      {visibleContacts.map(contact => {
         return (
-          <li className={css.item} key={selector.id}>
-            {selector.name} : {selector.number}
+          <li className={css.item} key={contact.id}>
+            {contact.name} : {contact.number}
             <button
               className={css.item__button}
-              onClick={() => dispatch(DeleteContact(selector.id))}
+              onClick={() => dispatch(DeleteContact(contact.id))}
             >
               Видалити
             </button>
